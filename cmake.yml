@@ -1,0 +1,23 @@
+name: C++ Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up C++
+        uses: actions/setup-cpp@v2
+        with:
+          compiler: g++
+          build-type: Release
+      - name: Build and Test
+        run: |
+          g++ -std=c++17 -Wall -Werror -Wpedantic test.cpp -o test
+          ./test
